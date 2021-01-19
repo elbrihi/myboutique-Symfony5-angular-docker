@@ -1,0 +1,45 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+            
+            
+            <service  id="medstor_user.controller.user_controller" class="Medstor\UserBundle\Controller\UserController">
+                <argument type="service" id="medstor_user.user_manager"></argument>
+
+            </service>
+            
+            <service  id="medstor_user.controller.auth_token_controller" class="Medstor\UserBundle\Controller\AuthTokenController">
+                <argument type="service" id="medstor_user.auth_token_manager"></argument>
+            </service>
+
+            <service id="medstor_user.user_manager" class="Medstor\UserBundle\Service\UserManager"> 
+                <argument type="service" id="doctrine.orm.entity_manager"></argument>
+                <argument type="service" id="form.factory" />
+                <argument type="service" id="security.password_encoder" />  
+            </service>
+
+            <service id="medstor_user.auth_token_manager" class="Medstor\UserBundle\Service\AuthTokenManager"> 
+                <argument type="service" id="doctrine.orm.entity_manager"></argument>
+                <argument type="service" id="form.factory" />
+                <argument type="service" id="security.password_encoder" />
+            </service>
+        
+            <service id="medstor_user.api_token_authenticator" class="Medstor\UserBundle\Security\ApiTokenAuthenticator">
+                    <argument type="service" id="medstor_user.auth_token_manager"></argument>
+            </service>
+
+
+
+        
+            <!--service  id="medstor_user.token_authenticator" class="Medstor\UserBundle\Security\TokenAuthenticator">
+                <argument type="service" id="doctrine.orm.entity_manager"></argument>
+            </service-->
+
+
+
+ 
+
+
+
+           
+    </services>
+</container>

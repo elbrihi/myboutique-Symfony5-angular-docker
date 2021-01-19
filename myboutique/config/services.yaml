@@ -1,0 +1,59 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    test: 'test'
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind: 
+            #$hotels_directory: '%hotels_directory%'
+            $adminEmail: 'manager@example.com'
+            $targetDir: '%kernel.project_dir%/public/uploads/medstor_catalog_images_directory'
+    
+    Medstor\:
+        resource: '../lib/Medstor/*'
+        exclude:
+            - '../lib/Medstor/UserBundle/DependencyInjection/'
+            
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+    #/home/yasine/Bureau/Pere/a3chabboutique/myboutique/vendor/symfony/framework-bundle/Controller/ControllerResolver.php
+   
+   
+   
+ 
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+    
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    #Medstor\CatalogBundle\MedstorCatalogBundle: ~
+
+    #MedStor\CatalogBundle\Controller\CategoryController:
+                            #tags: ['container.service_subscriber']
+                            
+    #medstor_catalog_test:
+                    #class: Medstor\CatalogBundle\Service\Test
+    #app_test:
+        #class: 'App\Service\Test'
+
+
+    home_controller:
+            class: 'App\Controller\TestController'
+            arguments:
+                #$app_test: '@app_test'
+                $adminEmail: 'manager@example.com'
+              

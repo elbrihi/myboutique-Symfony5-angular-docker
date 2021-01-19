@@ -1,0 +1,18 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="medstor_catalog_category.controller" class="MedStor\CatalogBundle\Controller\CategoryController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+
+            <tag name="container.service_subscriber"/>
+            <!--argument type="service" id="med_stor_catalog_category.controller" /-->
+        </service>
+
+        <service id="medstor_catalog.service_test" class="MedStor\CatalogBundle\ServiceTest"> </service>
+
+        <service id="MedStor\CatalogBundle\ServiceTest" class="med_stor_catalog.service_test"> </service>
+
+
+    </services>
+</container>

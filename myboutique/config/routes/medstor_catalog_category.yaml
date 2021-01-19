@@ -1,0 +1,6 @@
+medstor_catalog_category:
+          resource: '@MedstorCatalogBundle/Controller/'
+          type: annotation
+_catalog:
+      resource: '@MedstorCatalogBundle/Resources/config/routes.xml'
+      prefix: /api/catalog

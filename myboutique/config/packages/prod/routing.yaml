@@ -1,0 +1,6 @@
+medstor_category.controller.category:
+        resources: '@MedstorCatalogBundle/Controller/CategoryController.php'
+        type: annotation
+framework:
+    router:
+        strict_requirements: null

@@ -1,0 +1,42 @@
+security:
+    encoders:
+        Medstor\UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: Medstor\UserBundle\Entity\User
+                property: username
+                
+        #medstor_user.token_authenticator:
+                #id: medstor_user.token_authenticator
+        users_in_memory: {memory: null}
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+
+        main:
+            #anonymous: true
+            provider: app_user_provider
+            lazy: true
+            #custom_authenticators: 
+                        #- Medstor\UserBundle\Security\Test
+                        #- medstor_user.token_authenticator
+                        #-  Medstor\UserBundle\Security\TokenAuthenticator
+            guard:
+                authenticators:
+                    - medstor_user.api_token_authenticator
+    enable_authenticator_manager: true     
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

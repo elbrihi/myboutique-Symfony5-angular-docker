@@ -1,0 +1,3 @@
+#medstor_catalog_product:
+          #resource: '@MedstorCatalogBundle/Controller/Category/'
+          #type: annotation

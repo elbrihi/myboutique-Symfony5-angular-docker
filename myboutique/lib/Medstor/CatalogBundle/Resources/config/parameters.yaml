@@ -1,0 +1,3 @@
+parameters:
+    medstor_catalog_images_directory:
+         '%kernel.project_dir%/public/uploads/medstor_catalog_images_directory'

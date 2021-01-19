@@ -1,0 +1,56 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+
+        <service id="medstor_category_test" class="Medstor\CatalogBundle\Service\Test"></service>
+   
+        <service id="medstor_catalog_category.controller.category_api_controller"
+                class="Medstor\CatalogBundle\Controller\CategoryController" autowire="true" public="true">
+
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+
+            <!--tag name="container.service_subscriber"/-->
+            <argument type="service" id="medstor_catalago_category_manager"></argument>
+
+        </service>
+
+        <service id = "medstor_catalog_product.controller.product_api_controller" 
+                class="Medstor\CatalogBundle\Controller\Category\ProductController"  autowire="true" >
+            
+            <argument type="service" id="medstor_catalog_product_manager"></argument>
+        </service>
+
+
+
+        <service id="medstor_catalago_category_manager" class = "Medstor\CatalogBundle\Service\CategoryManager"> 
+
+            <argument type="service" id="doctrine.orm.entity_manager"></argument>
+
+            <argument type="service" id="form.factory" />
+
+            <argument type="service" id="medstor_catalog.image_uploader"></argument>
+
+            <argument key="$targetDir">%medstor_catalog_images_directory%</argument>
+
+
+        </service>
+
+        <service id="medstor_catalog_product_manager" class="Medstor\CatalogBundle\Service\ProductManager">
+
+            <argument type="service" id="doctrine.orm.entity_manager"></argument>
+
+            <argument type="service" id="form.factory" />
+
+            <argument type="service" id="medstor_catalog.image_uploader"></argument>
+   
+        </service>
+
+        <service id="medstor_catalog.image_uploader" class="Medstor\CatalogBundle\Service\ImageUploader" autowire="true">
+            <argument key="$targetDir">%medstor_catalog_images_directory%</argument>
+        </service>
+        
+        
+    </services>
+</container>

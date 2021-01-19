@@ -1,0 +1,24 @@
+medstor_catalog_category:
+    resource: '@MedstorCatalogBundle/Controller/CategoryController.php'
+    type: annotation
+
+medstor_user:
+    resource: '@MedstorUserBundle/Controller/UserController.php'
+    type: annotation
+
+medstor_user_auth_token:
+    resource: '@MedstorUserBundle/Controller/AuthTokenController.php'
+    type: annotation
+
+medstor_user_security:
+    resource: '@MedstorUserBundle/Controller/SecurityController.php'
+    type: annotation
+
+#medstor_catalog_product:
+         # resource: '@MedstorCatalogBundle/Controller/Category/ProductController.php'
+         # type: annotation
+
+
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
