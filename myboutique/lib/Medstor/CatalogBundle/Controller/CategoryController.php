@@ -37,6 +37,7 @@ class CategoryController extends AbstractController
         return $response;
     }
 
+    
     /**
      * 
      * @Rest\View()
@@ -44,6 +45,7 @@ class CategoryController extends AbstractController
      */
     public function fetchCategory()
     {
+        //dd($this->getUser() );
         return $this->category_manager->fetchCategory();
     }
     
@@ -55,7 +57,9 @@ class CategoryController extends AbstractController
      */
     public function newCategory(Request $request)
     {
-        return $this->category_manager->newCategory($request);
+        
+
+        return $this->category_manager->newCategory($request,$this->getUser());
     }
     
     /**
@@ -65,7 +69,9 @@ class CategoryController extends AbstractController
      */
     public function updateCategory(Request $request)
     {
-        return $this->category_manager->updateCategory($request,$request->get('id'));
+            //dd($this->getUser() );
+
+        return $this->category_manager->updateCategory($request,$request->get('id'),$this->getUser());
     }
 
     /**
@@ -75,6 +81,8 @@ class CategoryController extends AbstractController
      */
     public function deleteCategory(Request $request)
     {
+        //dd($this->getUser() );
+
         return $this->category_manager->deleteCategory($request,$request->get('id'));
     }
 

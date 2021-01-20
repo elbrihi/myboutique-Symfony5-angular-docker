@@ -48,10 +48,9 @@ class Category
 
     /**
      * 
-     * @ORM\ManyToOne(targetEntity="Medstor\UserBundle\Entity\User", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="Medstor\UserBundle\Entity\User", inversedBy="category")
      */
-    private $user;
-
+    private $user ;
 
     public function __construct()
     {
@@ -121,7 +120,13 @@ class Category
         
     }
 
-    public function setUser($user)
+    public function setUser($user):self
+    {
+        $this->user = $user ; 
+
+        return $this ;
+    }
+    public function getUser($user)
     {
         $this->user = $user ;
     }

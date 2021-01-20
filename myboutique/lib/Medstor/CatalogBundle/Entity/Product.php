@@ -53,6 +53,13 @@ class Product
      */
     private $category;
     
+    /**
+     * 
+     * @ORM\ManyToOne(targetEntity="Medstor\UserBundle\Entity\User", inversedBy="product")
+     */
+    private $user ;
+    
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -138,5 +145,16 @@ class Product
     public function getCategory(): ?object
     {
         return $this->category;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+    public function getUser(): ?object
+    {
+        return $this->user;
     }
 }

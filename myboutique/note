@@ -1,0 +1,10 @@
+/home/yasine/Bureau/Pere/myboutique/myboutique/vendor/willdurand/negotiation/src/Negotiation/AbstractNegotiator.php
+
+match(AcceptHeader $header, AcceptHeader $priority, $index)
+
+{
+                //return new Match($header->getQuality() * $priority->getQuality(), $score, $index);
+
+}
+
+/home/yasine/Bureau/Pere/myboutique/myboutique/vendor/willdurand/negotiation/src/Negotiation/AbstractNegotiator.php

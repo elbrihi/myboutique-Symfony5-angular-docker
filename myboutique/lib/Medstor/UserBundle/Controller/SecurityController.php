@@ -21,6 +21,7 @@ class SecurityController extends AbstractController
     public function loginAction(): Response
     {
 
+        
         $response = new Response();
         return $response;
         //return $this->render('security/login.html.twig');

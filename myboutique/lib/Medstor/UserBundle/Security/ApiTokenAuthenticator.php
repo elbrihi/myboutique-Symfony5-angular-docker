@@ -22,6 +22,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
     private $authtoken_manager;
     public function __construct(AuthTokenManager $authtoken_manager)
     {
+        
         $this->authtoken_manager = $authtoken_manager;
     }
     /**
@@ -31,6 +32,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
+
        return $request->headers->has('Authorization');
     
     }
@@ -52,6 +54,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
         $request = new Request();
         $token = $this->authtoken_manager->fetchAuthToken($credentials);
         
+
         return $token;
                 
         if (null === $credentials) {
@@ -59,7 +62,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
             // Code 401 "Unauthorized"
             return null;
         }
-
         // The "username" in this case is the apiToken, see the key `property`
         // of `your_db_provider` in `security.yaml`.
         // If this returns a user, checkCredentials() is called next:

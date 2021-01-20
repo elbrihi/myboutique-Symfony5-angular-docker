@@ -30,6 +30,8 @@ security:
                         #- Medstor\UserBundle\Security\Test
                         #- medstor_user.token_authenticator
                         #-  Medstor\UserBundle\Security\TokenAuthenticator
+            #custom_authenticators:
+                #- medstor_user.api_token_authenticator
             guard:
                 authenticators:
                     - medstor_user.api_token_authenticator

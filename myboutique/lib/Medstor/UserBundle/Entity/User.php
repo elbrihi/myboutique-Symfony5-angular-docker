@@ -5,6 +5,8 @@ namespace Medstor\UserBundle\Entity;
 use Medstor\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -36,7 +38,26 @@ class User implements UserInterface
 
     protected $plainPassword;
 
-   
+   /**
+    * 
+    *@ORM\OneToMany(targetEntity="Medstor\CatalogBundle\Entity\Category", mappedBy="user")
+    */
+
+    private $category;
+
+
+    /***
+     * 
+     * @ORM\OneToMany(targetEntity="Medstor\CatalogBundle\Entity\Product", mappedBy="user")
+     */
+    private $product ; 
+
+    public function __construct()
+    {
+        $this->category = new ArrayCollection();
+        $this->product = new ArrayCollection();
+
+    }
     public function getId(): ?int
     {
         return $this->id;

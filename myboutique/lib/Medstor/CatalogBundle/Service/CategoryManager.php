@@ -39,7 +39,7 @@ class CategoryManager
         return $category;
         
     }
-    public function updateCategory($request, $id_category)
+    public function updateCategory($request, $id_category,$user_provider)
     {
         
         $category = $this->entity_manager->getRepository('MedstorCatalogBundle:Category')
@@ -47,9 +47,13 @@ class CategoryManager
         ->find($id_category);
         
         $category->setTitle($request->get('title'));
+
         $category->setUrlKey($request->get('url_key'));
+
         $category->setDescription($request->get('description'));
       
+        $category->setUser($user_provider);
+
         $form = $this->form_factory->create(CategoryType::class, $category);    
         $form->submit($request->request->all(),false);
         
@@ -69,13 +73,12 @@ class CategoryManager
 
         return $form;
     }
-    public function newCategory($request)
+    public function newCategory($request,$user_provider)
     {
-       
-        $user =  $this->findUserByToken($request->headers->get('Authorization'));
+        //$user =  $this->findUserByToken($request->headers->get('Authorization'));
 
-
-        dd($user);
+        //dd($user_provider);
+        
 
         $category = new Category();
 
@@ -89,10 +92,15 @@ class CategoryManager
        
         $category->setImage($file);
 
+       
+        
         $data = $form->getData();
        
         if ($form->isSubmitted() && $form->isValid()) 
         {
+
+            $category->setUser($user_provider);
+
             $this->entity_manager->persist($category);
             
             $this->entity_manager->flush();

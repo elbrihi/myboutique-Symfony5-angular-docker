@@ -32,13 +32,23 @@ class ProductController extends AbstractController
     }
 
     /**
+     * 
+     * @Rest\View()
+     * @Rest\Get("/category/products"))
+     */
+    public function fetchAllProduct()
+    {   
+       return  $this->product_manager->fetchAllProduct();
+
+    }
+    /**
      * @Rest\View()
      * @Rest\Post("/category/{id}/product/new",name="new_product")
      */
     public function newProduct(Request $request)
     {
     
-        return $this->product_manager->newProduct($request,$request->get('id')) ;
+        return $this->product_manager->newProduct($request,$request->get('id'),$this->getUser()) ;
     }
     /**
      * @Rest\View()

@@ -28,7 +28,12 @@ class ProductManager
         $this->image_uploader = $image_uploader;
     }
 
-    public function newProduct($request,$id_category)
+    public function fetchAllProduct()
+    {
+        return $this->entity_manager->getRepository('Medstor\CatalogBundle\Entity\Product')
+                ->findAll();
+    }
+    public function newProduct($request,$id_category,$user_provider)
     {
 
         $category = $this->entity_manager->getRepository('MedstorCatalogBundle:Category')
@@ -36,7 +41,9 @@ class ProductManager
 
         $product = new Product();
         
-        $product->setCategory($category);
+        $file = $request->files->get('image');
+        
+        $file = $this->image_uploader->upload($file);
 
         $form = $this->form_factory->create(ProductType::class, $product);
         
@@ -44,6 +51,13 @@ class ProductManager
        
         $data = $form->getData();
        
+        $product->setImage($file);
+
+        $product->setUser($user_provider);
+
+        $product->setCategory($category);
+
+
         
         if ($form->isSubmitted() && $form->isValid()) 
         {
@@ -52,23 +66,27 @@ class ProductManager
             
             $this->entity_manager->flush();
 
+
             return $product ;
+        }
+        else
+        {
+            return $form ;
         }
     }
     public function updateProduct($request, $id_category)
     {
         
+
+
+        $product = new Product();
+  
         $product = $this->entity_manager->getRepository('MedstorCatalogBundle:Product')
         
         ->find($id_category);
-        
-        $product->setTitle($request->get('title'));
-        $product->setPrice($request->get('price'));
-        $product->setUrlKey($request->get('url_key'));
-        $product->setUrlKey($request->get('url_key'));
-        $product->setDescription($request->get('description'));
-      
+       
         $form = $this->form_factory->create(ProductType::class, $product);    
+
         $form->submit($request->request->all(),false);
         
         if($file = $request->files->get('image'))
