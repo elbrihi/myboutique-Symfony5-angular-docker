@@ -56,4 +56,15 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-        
+    
+    node:
+           
+        build:
+            context:  myboutique-front/
+            dockerfile: Dockerfile
+        volumes:
+            - './myboutique-front:/app'
+            - '/app/node_modules'
+        ports:
+            - '4200:4200'
+                
